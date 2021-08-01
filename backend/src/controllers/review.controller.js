@@ -20,13 +20,19 @@ router.post("/post", async (req, res) => {
   let { productId, rating } = req.body;
   rating = +rating;
   let review = await Review.create(req.body);
-
-  let product = await Product.findById(productId);
-  product.ratings = parseFloat((product.ratings + rating) / 2).toFixed(1);
+  // console.log(productId)
+  let product = await Product.findById(productId).lean().exec();
+  // console.log(product.rating)
+  // console.log(rating)
+  // console.log(((product.rating + rating)))
+  product.rating = Number(parseFloat((product.rating + rating) / 2).toFixed(1));
+  console.log(productId, product,)
+  
   let newProduct = await Product.findByIdAndUpdate(productId, product, {
     new: true,
   });
-  res.status(201).json({ data: review });
+  console.log(34,newProduct)
+  res.status(201).json({ data: review,product_data:newProduct });
 });
 
 module.exports = router;

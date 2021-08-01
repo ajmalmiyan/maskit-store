@@ -9,11 +9,10 @@ router.post("/", async (req, res) => {
   let [inComingMin, inComingMax] = req.body.priceLimit;
   let page = +req.query.page || 1;
   let sortSelection = +req.query.sort;
-  let size = 9;
+  let size = 8;
   let offset = (page - 1) * size;
   let brandsArray = req.body.brandsArray;
   let categoriesArray = req.body.categoriesArray;
-
   if (brandsArray.length === 0) {
     let brands = await Brand.find({}).lean().exec();
     brandsArray = getAll(brands);
@@ -23,13 +22,15 @@ router.post("/", async (req, res) => {
     let categories = await Category.find({}).lean().exec();
     categoriesArray = getAll(categories);
   }
-
+  // console.log(25,categoriesArray,brandsArray)
   let products;
+
+  // console.log(categoriesArray)
 
   products = await Product.find({
     price: { $gte: inComingMin, $lte: inComingMax },
     categoryId: { $in: categoriesArray },
-    brandId: { $in: brandsArray },
+   brandId: { $in: brandsArray },
   })
     .sort(sortSelection !== 0 ? { price: sortSelection } : {})
     .populate("categoryId")
@@ -38,8 +39,9 @@ router.post("/", async (req, res) => {
     .limit(size)
     .lean()
     .exec();
-
+// console.log(products)
   //total products
+  
   totalProducts = await Product.find({
     price: { $gte: inComingMin, $lte: inComingMax },
     categoryId: { $in: categoriesArray },

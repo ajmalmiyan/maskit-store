@@ -4,8 +4,7 @@ function categoriesCollector(products) {
     if (!categories[products[i].categoryId._id]) {
       categories[products[i].categoryId._id] = {
         _id: products[i].categoryId._id,
-        name: products[i].categoryId.name,
-        img: products[i].categoryId.img,
+        category_name: products[i].categoryId.category_name,
         items: 1,
       };
     } else {
@@ -13,6 +12,7 @@ function categoriesCollector(products) {
         categories[products[i].categoryId._id].items + 1;
     }
   }
+  // console.log(categories)
   return categories;
 }
 
@@ -22,8 +22,7 @@ function brandsCollector(products) {
     if (!brands[products[i].brandId._id]) {
       brands[products[i].brandId._id] = {
         _id: products[i].brandId._id,
-        name: products[i].brandId.name,
-        img: products[i].brandId.img,
+        brand_name: products[i].brandId.brand_name,
         items: 1,
       };
     } else {

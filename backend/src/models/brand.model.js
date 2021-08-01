@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const brandSchema = new mongoose.Schema(
   {
-    name: { type: String, require: true },
-    img: { type: String },
+    brand_name: { type: String, require: true }
   },
   { timestamps: true }
 );
