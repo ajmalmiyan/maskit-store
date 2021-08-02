@@ -23,12 +23,17 @@ const getProductsFailure = () => {
 export const getProductsHandler =
   (payload, currentPage, sortSelection) => (dispatch) => {
     dispatch(getProductsRequest());
+    console.log(currentPage,sortSelection,payload)
     return axios
       .post(
         `http://localhost:8000/products?page=${currentPage}&sort=${sortSelection}`,
         payload
       )
-      .then((res) => dispatch(getProductsSuccess(res.data)))
+      .then((res) =>
+       {dispatch(getProductsSuccess(res.data))
+      console.log(res.data) 
+      }
+       )
       .catch((err) => dispatch(getProductsFailure()));
   };
 

@@ -1,14 +1,16 @@
 import { Switch, Route } from "react-router-dom";
-import Shop from "../Pages/Shop/Shop";
+import Shop from "../Components/Shop/Shop";
 import React from "react";
-import Solo from "../Pages/SoloProduct/Solo";
-import Auth from "../Pages/Auth/Auth";
+import Solo from "../Components/SoloProduct/Solo";
+import Auth from "../Components/Auth/Auth";
 import { AntiPrivateRoute, PrivateRoute } from "./PrivateRoutes";
-import Checkout from "../Pages/Checkout/Checkout";
-import Home from "../Pages/Home/Home";
-import Profile from "../Pages/Profile/Profile";
+import Checkout from "../Components/Checkout/Checkout";
+import Home from "../Components/Home/Home";
+import Profile from "../Components/Profile/Profile";
 import image from "../Images/404.svg";
 import styled from "styled-components";
+import WishList from "../Components/WishList/WishList";
+import Cart from "../Components/Cart/Cart";
 
 const Error = styled.div`
   min-height: 100vh;
@@ -20,22 +22,28 @@ function Router() {
   return (
     <Switch>
       <Route exact path="/">
-        <Home></Home>
+        <Home/>
       </Route>
       <Route exact path="/shop">
         <Shop />
       </Route>
       <Route path="/shop/:id">
-        <Solo></Solo>
+        <Solo/>
       </Route>
       <PrivateRoute path="/checkout">
-        <Checkout></Checkout>
+        <Checkout/>
       </PrivateRoute>
       <PrivateRoute path="/profile">
-        <Profile></Profile>
+        <Profile/>
+      </PrivateRoute>
+      <PrivateRoute path="/wishlist">
+        <WishList/>
+      </PrivateRoute>
+      <PrivateRoute path="/cart">
+        <Cart/>
       </PrivateRoute>
       <AntiPrivateRoute path="/auth/:auth">
-        <Auth></Auth>
+        <Auth/>
       </AntiPrivateRoute>
       <Route>
         <Error>
