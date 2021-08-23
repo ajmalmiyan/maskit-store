@@ -1,16 +1,16 @@
 import { Switch, Route } from "react-router-dom";
-import Shop from "../Components/Shop/Shop";
+import {Shop} from "../Components/Shop/Shop";
 import React from "react";
-import Solo from "../Components/SoloProduct/Solo";
-import Auth from "../Components/Auth/Auth";
+import {Solo} from "../Components/SoloProduct/Solo";
+import {Auth} from "../Components/Auth/Auth";
 import { AntiPrivateRoute, PrivateRoute } from "./PrivateRoutes";
-import Checkout from "../Components/Checkout/Checkout";
-import Home from "../Components/Home/Home";
-import Profile from "../Components/Profile/Profile";
+import {Checkout} from "../Components/Checkout/Checkout";
+import {Home} from "../Components/Home/Home";
+import {Profile} from "../Components/Profile/Profile";
 import image from "../Images/404.svg";
 import styled from "styled-components";
-import WishList from "../Components/WishList/WishList";
-import Cart from "../Components/Cart/Cart";
+import {WishList} from "../Components/WishList/WishList";
+import {Cart} from "../Components/Cart/Cart";
 
 const Error = styled.div`
   min-height: 100vh;
@@ -18,7 +18,7 @@ const Error = styled.div`
   place-content: center;
 `;
 
-function Router() {
+export const Router=()=> {
   return (
     <Switch>
       <Route exact path="/">
@@ -53,5 +53,3 @@ function Router() {
     </Switch>
   );
 }
-
-export default Router;

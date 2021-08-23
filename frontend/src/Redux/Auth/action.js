@@ -25,12 +25,10 @@ const getLoginFailure = (status) => {
 export const getLoginHandler = (payload) => (dispatch) => {
   dispatch(getLoginRequest());
   return axios
-    .post(`http://localhost:8000/auth/login`, payload)
+    .post(`https://maskitstore.vercel.app/auth/login`, payload)
     .then((res) => dispatch(getLoginSuccess(res.data, res.status)))
     .catch((err) => dispatch(getLoginFailure(err.status)));
 };
-
-//sign up
 
 const getSignupRequest = () => {
   return {
@@ -56,7 +54,7 @@ const getSignupFailure = (status) => {
 export const getSignupHandler = (payload) => (dispatch) => {
   dispatch(getSignupRequest());
   return axios
-    .post(`http://localhost:8000/auth/signup`, payload)
+    .post(`https://maskitstore.vercel.app/auth/signup`, payload)
     .then((res) => dispatch(getSignupSuccess(res.data, res.status)))
     .catch((err) => dispatch(getSignupFailure(err.status)));
 };

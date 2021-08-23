@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ReviewsWrapper = styled.div`
   width: 70%;
@@ -56,7 +56,7 @@ export const ReviewsCard = styled.div`
 
 export const ReviewForm = styled.div`
   position: relative;
-  width:50%;
+  width: 50%;
   form {
     display: flex;
     flex-direction: column;
@@ -70,7 +70,6 @@ export const ReviewForm = styled.div`
     display: block;
     font-weight: 400;
     margin: 5px 0;
-    /* text-transform: uppercase; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     letter-spacing: 0.2ch;
   }
@@ -120,11 +119,11 @@ export const EmptyReview = styled.div`
   background-color: #f5f5f5;
 `;
 
-
 export const SoloWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
 
+  margin-top: 15vh;
   display: flex;
   flex-direction: column;
   a {
@@ -185,18 +184,15 @@ export const ProductPrice = styled.p`
 export const Category = styled.div`
   letter-spacing: 0.4ch;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-
-  /* text-transform: uppercase; */
 `;
 
 export const AddToCart = styled.button`
   width: 45%;
   font-size: 23px;
   font-weight: 500;
-  letter-spacing: 0.5ch;
+  /* letter-spacing: 0.5ch; */
   background-color: ${(props) => props.theme.btnBackground};
   color: ${(props) => (props.color ? props.color : "white")};
-  /* text-transform: uppercase; */
   padding: 10px;
   border: 2px solid ${(props) => props.theme.btnBackground};
   border-radius: 5px;

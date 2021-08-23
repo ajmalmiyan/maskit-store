@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthButton, AuthForm } from "./Auth";
+import { AuthButton, AuthForm } from "./Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getSignupHandler } from "../../Redux/Auth/action";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -11,7 +11,7 @@ const initState = {
   password: "",
 };
 
-function Signup() {
+export const Signup=()=> {
   const [formData, setFormData] = React.useState(initState);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
   const isError = useSelector((state) => state.authReducer.isError);
@@ -19,14 +19,14 @@ function Signup() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  function onChangeHandler(e) {
+  const onChangeHandler=(e)=> {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   }
 
   React.useState(() => {}, [isLoading]);
 
-  function onSubmitHandler(e) {
+  const onSubmitHandler=(e)=> {
     e.preventDefault();
     dispatch(getSignupHandler(formData));
     if (isAuth) {
@@ -93,5 +93,3 @@ function Signup() {
     </AuthForm>
   );
 }
-
-export default Signup;

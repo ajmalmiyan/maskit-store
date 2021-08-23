@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import {SearchCardWrapper,ProductPrice} from './Styles';
 
-function SearchCard({
+export const SearchCard=({
   setSearchModal,
   _id,
   product_name,
@@ -10,9 +10,9 @@ function SearchCard({
   price,
   categoryId,
   setSearch,
-}) {
+}) =>{
   const history = useHistory();
-  function onClickHandler() {
+  const onClickHandler=()=> {
     history.push(`/shop/${_id}`);
     setSearchModal(false);
     setSearch("");
@@ -28,5 +28,3 @@ function SearchCard({
     </SearchCardWrapper>
   );
 }
-
-export default SearchCard;

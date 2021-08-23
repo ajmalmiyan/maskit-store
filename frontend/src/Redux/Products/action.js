@@ -23,15 +23,13 @@ const getProductsFailure = () => {
 export const getProductsHandler =
   (payload, currentPage, sortSelection) => (dispatch) => {
     dispatch(getProductsRequest());
-    console.log(currentPage,sortSelection,payload)
     return axios
       .post(
-        `http://localhost:8000/products?page=${currentPage}&sort=${sortSelection}`,
+        `https://maskitstore.vercel.app/products?page=${currentPage}&sort=${sortSelection}`,
         payload
       )
       .then((res) =>
        {dispatch(getProductsSuccess(res.data))
-      console.log(res.data) 
       }
        )
       .catch((err) => dispatch(getProductsFailure()));
@@ -59,7 +57,7 @@ const getCategoriesFailure = () => {
 export const getCategoriesHandler = () => (dispatch) => {
   dispatch(getCategoriesRequest());
   return axios
-    .get("http://localhost:8000/categories")
+    .get("https://maskitstore.vercel.app/categories")
     .then((res) => dispatch(getCategoriesSuccess(res.data)))
     .catch((err) => dispatch(getCategoriesFailure()));
 };
@@ -86,7 +84,7 @@ const getBrandsFailure = () => {
 export const getBrandsHandler = () => (dispatch) => {
   dispatch(getBrandsRequest());
   return axios
-    .get("http://localhost:8000/brands")
+    .get("https://maskitstore.vercel.app/brands")
     .then((res) => dispatch(getBrandsSuccess(res.data)))
     .catch((err) => dispatch(getBrandsFailure()));
 };
@@ -113,14 +111,12 @@ const getSoloProductFailure = () => {
 export const getSoloProductHandler = (id) => (dispatch) => {
   dispatch(getSoloProductRequest());
   return axios
-    .get(`http://localhost:8000/products/${id}`)
+    .get(`https://maskitstore.vercel.app/products/${id}`)
     .then((res) => {
       dispatch(getSoloProductSuccess(res.data));
     })
     .catch((err) => dispatch(getSoloProductFailure()));
 };
-
-// getting reviews for a product
 
 const getProductReviewRequest = () => {
   return {
@@ -144,12 +140,11 @@ const getProductReviewFailure = () => {
 export const getProductReviewHandler = (id) => (dispatch) => {
   dispatch(getProductReviewRequest());
   return axios
-    .get(`http://localhost:8000/reviews/${id}`)
+    .get(`https://maskitstore.vercel.app/reviews/${id}`)
     .then((res) => dispatch(getProductReviewSuccess(res.data)))
     .catch((err) => dispatch(getProductReviewFailure()));
 };
 
-//posting reviews for a product
 
 const postProductReviewRequest = () => {
   return {
@@ -173,12 +168,10 @@ export const postProductReviewHandler = (payload) => (dispatch) => {
   dispatch(postProductReviewRequest());
 
   return axios
-    .post(`http://localhost:8000/reviews/post`, payload)
+    .post(`https://maskitstore.vercel.app/reviews/post`, payload)
     .then((res) => dispatch(postProductReviewSuccess(res.data)))
     .catch((err) => dispatch(postProductReviewFailure()));
 };
-
-// getting recommendations
 
 const getRecommendationsRequest = () => {
   return {
@@ -202,12 +195,11 @@ const getRecommendationsFailure = () => {
 export const getRecommendationsHandler = (id) => (dispatch) => {
   dispatch(getRecommendationsRequest());
   return axios
-    .get(`http://localhost:8000/products/category/${id}`)
+    .get(`https://maskitstore.vercel.app/products/category/${id}`)
     .then((res) => dispatch(getRecommendationsSuccess(res.data)))
     .catch((err) => dispatch(getRecommendationsFailure()));
 };
 
-// more from same brand
 const getFromSameBrandRequest = () => {
   return {
     type: actionTypes.GET_FROM_SAME_BRAND_REQUEST,
@@ -230,14 +222,11 @@ const getFromSameBrandFailure = () => {
 export const getFromSameBrandHandler = (id) => (dispatch) => {
   dispatch(getFromSameBrandRequest());
   return axios
-    .get(`http://localhost:8000/products/brand/${id}`)
+    .get(`https://maskitstore.vercel.app/products/brand/${id}`)
     .then((res) => dispatch(getFromSameBrandSuccess(res.data)))
     .catch((err) => dispatch(getFromSameBrandFailure()));
 };
 
-//search query for nav
-
-// more from same brand
 const getSearchRequest = () => {
   return {
     type: actionTypes.GET_SEARCH_REQUEST,
@@ -260,12 +249,10 @@ const getSearchFailure = () => {
 export const getSearchHandler = (query) => (dispatch) => {
   dispatch(getSearchRequest());
   return axios
-    .get(`http://localhost:8000/products/search/${query}`)
+    .get(`https://maskitstore.vercel.app/products/search/${query}`)
     .then((res) => dispatch(getSearchSuccess(res.data)))
     .catch((err) => dispatch(getSearchFailure()));
 };
-
-//for home
 
 const getProductsHomeRequest = () => {
   return {
@@ -289,7 +276,7 @@ const getProductsHomeFailure = () => {
 export const getProductsHomeHandler = (payload, currentPage) => (dispatch) => {
   dispatch(getProductsHomeRequest());
   return axios
-    .get(`http://localhost:8000/products/home/products`)
+    .get(`https://maskitstore.vercel.app/products/home/products`)
     .then((res) => dispatch(getProductsHomeSuccess(res.data)))
     .catch((err) => dispatch(getProductsHomeFailure()));
 };

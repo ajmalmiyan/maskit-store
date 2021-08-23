@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthButton, AuthForm } from "./Auth";
+import { AuthButton, AuthForm } from "./Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginHandler } from "../../Redux/Auth/action";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -9,21 +9,21 @@ const initState = {
   password: "",
 };
 
-function Login() {
+export const Login =()=> {
   const [formData, setFormData] = React.useState(initState);
-  const isLoading = useSelector((state) => state.authReducer.isLoading);
+  // const isLoading = useSelector((state) => state.authReducer.isLoading);
   const isError = useSelector((state) => state.authReducer.isError);
   const isAuth = useSelector((state) => state.authReducer.isAuth);
-  const statusCode = useSelector((state) => state.authReducer.status);
+  // const statusCode = useSelector((state) => state.authReducer.status);
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  function onChangeHandler(e) {
+  const onChangeHandler=(e)=> {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   }
 
-  function onSubmitHandler(e) {
+  const onSubmitHandler=(e)=> {
     e.preventDefault();
     dispatch(getLoginHandler(formData));
 
@@ -85,4 +85,3 @@ function Login() {
   );
 }
 
-export default Login;

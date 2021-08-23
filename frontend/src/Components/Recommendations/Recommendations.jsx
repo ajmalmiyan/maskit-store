@@ -9,14 +9,14 @@ import {
   ProductPrice,
 } from "./Styles";
 
-function Recommendations({
+export const Recommendations=({
   _id,
   product_name,
   price,
   brandId,
   product_image,
   ratings,
-}) {
+}) =>{
   let history = useHistory();
   const onClickHandler = () => {
     history.push(`/shop/${_id}`);
@@ -37,5 +37,3 @@ function Recommendations({
     </ProductCardWrapper>
   );
 }
-
-export default Recommendations;

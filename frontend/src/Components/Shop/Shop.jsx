@@ -1,7 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import { PageWrapper } from "../../Components/Global/Wrapper";
-import Filter from "./Filter";
+import { Filter } from "./Filter";
 import { useHistory } from "react-router-dom";
 import {
   getProductsHandler,
@@ -9,11 +7,10 @@ import {
   getBrandsHandler,
 } from "../../Redux/Products/action";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "./ProductCard";
-import { Paragraph, SubHeadingThree } from "../../Components/Global/Typography";
+import { ProductCard } from "./ProductCard";
+import { Paragraph } from "../../Components/Global/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
-import Hero from "./Carousel";
 import {
   getCartHandler,
   postCartHandler,
@@ -21,7 +18,7 @@ import {
   postWishlistHandler,
   deleteWishlistHandler,
 } from "../../Redux/CartWish/action";
-import Loader from "../../Components/Loader/Loader";
+import {PageWrapper,Container,ShopContainer,SortingField,ShopItems,PaginationWapper} from './Styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,74 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Container = styled.div`
-  display: flex;
-  width: 80%;
-  
-/* margin-left: 50px; */
-/* margin-right: 50px; */
-  margin: 50px auto;
-  max-width: 1600px;
-
-  > div {
-    padding: 10px;
-  }
-  > div:nth-child(1) {
-    width: 25%;
-  }
-  > div:nth-child(2) {
-    width: 75%;
-  }
-`;
-
-const ShopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SortingField = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 15px;
-
-  p {
-    font-size: 22px;
-  }
-  select {
-    font-size: 16px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    margin: 0 -15%;
-    outline: none;
-    border: 1px solid #dad5d5;
-  }
-  option {
-    font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    width: 200px;
-    border: 1px solid #dad5d5;
-  }
-`;
-
-const ShopItems = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const PaginationWapper = styled.div`
-  padding: 20px;
-  display: flex;
-  justify-content: space-around;
-  /* flex-direction: row-reverse; */
-`;
-
-function Shop() {
+export const Shop = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.productReducer.products);
-  const isLoading = useSelector((state) => state.productReducer.isLoading);
   const productsTotal = useSelector(
     (state) => state.productReducer.productsTotal
   );
@@ -115,7 +48,6 @@ function Shop() {
   const productsInWishlist = useSelector(
     (state) => state.cartWishReducer.uniqueWishlist
   );
-  console.log(categories)
   const [priceLimit, setPriceLimit] = React.useState([0, 1000000000000]);
   const [brandsArray, setBrandsArray] = React.useState([]);
   const [categoriesArray, setCategoriesArray] = React.useState([]);
@@ -171,38 +103,32 @@ function Shop() {
     }
   };
 
-  // function clearCheckbox(className) {
-  //   let element = document.getElementsByClassName(className);
-  //   for (let i = 0; i < element.length; i++) {
-  //     element[i].checked = false;
-  //   }
-  // }
-
-  //resetting page number whenever filter changes
   React.useEffect(() => {
     setCurrentPage(1);
   }, [brandsArray, categoriesArray]);
 
-  function getProducts() {
+  const getProducts = () => {
     let payload = {
       priceLimit,
       categoriesArray,
       brandsArray,
     };
     dispatch(getProductsHandler(payload, currentPage, sortSelection));
-  }
+  };
 
   React.useEffect(() => {
     getProducts();
+    // eslint-disable-next-line 
   }, [priceLimit, categoriesArray, brandsArray, currentPage, sortSelection]);
 
   React.useEffect(() => {
     getProducts();
     dispatch(getCategoriesHandler());
     dispatch(getBrandsHandler());
+    // eslint-disable-next-line 
   }, []);
 
-  function addToCartHandler(productId) {
+  const addToCartHandler = (productId) => {
     if (!isAuth) {
       return history.push("/auth/login");
     }
@@ -213,8 +139,8 @@ function Shop() {
     dispatch(postCartHandler(payload)).then((res) =>
       dispatch(getCartHandler(userData._id))
     );
-  }
-  function addToWishlistHandler(productId) {
+  };
+  const addToWishlistHandler = (productId) => {
     if (!isAuth) {
       return history.push("/auth/login");
     }
@@ -225,8 +151,8 @@ function Shop() {
     dispatch(postWishlistHandler(payload)).then((res) =>
       dispatch(getWishlistHandler(userData._id))
     );
-  }
-  function removeFromWishlistHandler(productId) {
+  };
+  const removeFromWishlistHandler = (productId) => {
     let wishlistSolo = wishlistArray.find(
       (item) => item.productId._id === productId
     );
@@ -234,15 +160,14 @@ function Shop() {
     dispatch(deleteWishlistHandler(wishlistSolo?._id)).then((res) =>
       dispatch(getWishlistHandler(userData._id))
     );
-  }
-  function onCheckoutHandler() {
+  };
+  const onCheckoutHandler = () => {
     history.push("/checkout");
-  }
+  };
 
   return (
     <>
       <PageWrapper>
-        {/* <Hero></Hero> */}
         <Container>
           <Filter
             minPrice={minPrice}
@@ -310,6 +235,4 @@ function Shop() {
       </PageWrapper>
     </>
   );
-}
-
-export default Shop;
+};

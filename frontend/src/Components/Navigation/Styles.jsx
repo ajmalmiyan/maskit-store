@@ -1,10 +1,17 @@
 import styled from 'styled-components';
 
+export const NavbarFix = styled.div`
+position: fixed;
+width: 100%;
+z-index: 1000;
+top:0;
+`;
+
 export const NavbarWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 15vh;
-  background-color: #76ff03;
+  background-color: #ffffff;
   color: #000000;
   border-bottom: 1px solid #e4e4e4;
 `;

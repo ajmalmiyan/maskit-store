@@ -38,7 +38,7 @@ const ProductPrice = styled.p`
   }
 `;
 
-function OrderProductCard({ product_name, product_image, price }) {
+export const OrderProductCard=({ product_name, product_image, price })=> {
   return (
     <CardWrapper>
       <div>
@@ -51,5 +51,3 @@ function OrderProductCard({ product_name, product_image, price }) {
     </CardWrapper>
   );
 }
-
-export default OrderProductCard;

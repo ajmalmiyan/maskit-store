@@ -1,7 +1,7 @@
 import React from "react";
 import {Wrapper,PreLoader} from './Styles';
 
-function Loader() {
+export const Loader=()=> {
   return (
     <Wrapper>
       <PreLoader>
@@ -10,5 +10,3 @@ function Loader() {
     </Wrapper>
   );
 }
-
-export default Loader;

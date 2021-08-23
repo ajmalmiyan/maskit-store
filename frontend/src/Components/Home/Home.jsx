@@ -1,10 +1,10 @@
 import React from "react";
-import Hero from "./Carousel";
+import {Hero} from "./Carousel";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import Recommendations from "../../Components/Recommendations/Recommendations";
+import {Recommendations} from "../../Components/Recommendations/Recommendations";
 import { getProductsHomeHandler } from "../../Redux/Products/action";
-import Loader from "../../Components/Loader/Loader";
+import {Loader} from "../../Components/Loader/Loader";
 
 const RecommendationDisplay = styled.div`
   display: flex;
@@ -14,7 +14,6 @@ const RecommendationDisplay = styled.div`
 const ProductsCollection = styled.div`
   width: 80%;
   max-width: 1600px;
-  /* margin: 0px 5% 0px 5%; */
   margin: 50px auto;
   h2 {
     padding-left: 0.5%;
@@ -26,7 +25,7 @@ const ProductsCollection = styled.div`
   }
 `;
 
-function Home() {
+export const Home=()=>{
   const dispatch = useDispatch();
   const featured = useSelector((state) => state.productReducer.featured);
   const popular = useSelector((state) => state.productReducer.popular);
@@ -34,8 +33,8 @@ function Home() {
 
   React.useEffect(() => {
     dispatch(getProductsHomeHandler());
+// eslint-disable-next-line 
   }, []);
-  // console.log(featured.brandId.name)
   return (
     <>
       {isLoading ? (
@@ -43,7 +42,7 @@ function Home() {
           <Loader></Loader>
         </>
       ) : (
-        <div>
+        <div style={{marginTop:"15vh"}}>
           <Hero></Hero>
           <ProductsCollection>
             <div style={{textAlign:"center"}}>
@@ -69,5 +68,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

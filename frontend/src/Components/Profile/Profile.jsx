@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrdersHandler } from "../../Redux/Orders/action";
-import OrderCard from "./OrderCard";
+import {OrderCard} from "./OrderCard";
 import wave from "../../Images/wave.svg";
 import empty from "../../Images/empty.svg";
 
@@ -72,7 +72,7 @@ const OrderEmpty = styled.div`
   background-position: center;
 `;
 
-function Profile() {
+export const Profile=()=> {
   const userData = useSelector((state) => state.authReducer.userData);
   const orders = useSelector((state) => state.ordersReducer.orders);
   const dispatch = useDispatch();
@@ -81,9 +81,9 @@ function Profile() {
 
   React.useEffect(() => {
     dispatch(getOrdersHandler(_id));
+  // eslint-disable-next-line 
   }, []);
-
-  console.log(orders);
+  
   return (
     <ProfileWrapper>
       <div>
@@ -127,5 +127,3 @@ function Profile() {
     </ProfileWrapper>
   );
 }
-
-export default Profile;

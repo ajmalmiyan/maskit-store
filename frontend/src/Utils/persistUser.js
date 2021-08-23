@@ -1,14 +1,13 @@
-function storeData(data) {
+export const storeData=(data)=> {
   localStorage.setItem("user", JSON.stringify(data));
 }
 
-function getData() {
+export const getData=()=> {
   let user = JSON.parse(localStorage.getItem("user"));
   return user;
 }
 
-function deleteData() {
+export const deleteData=()=> {
   localStorage.removeItem("user");
 }
 
-export { storeData, getData, deleteData };

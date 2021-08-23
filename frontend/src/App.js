@@ -1,12 +1,8 @@
 import React from "react";
-import Router from "./Routes/Router";
-import styled, { ThemeProvider } from "styled-components";
+import { Router } from "./Routes/Router";
+import { ThemeProvider } from "styled-components";
 import "./App.css";
-import Navbar from "./Components/Navigation/Navbar";
-import Cart from "./Components/Cart/Cart";
-import WishList from "./Components/WishList/WishList";
-import Footer from "./Components/Footer/Footer";
-import { useSelector } from "react-redux";
+import { Navbar } from "./Components/Navigation/Navbar";
 import { useHistory } from "react-router";
 
 const theme = {
@@ -23,9 +19,8 @@ const theme = {
 };
 
 function App() {
+  // eslint-disable-next-line 
   const [activeTheme, setActiveTheme] = React.useState("light");
-  const [cartState, setCartState] = React.useState(false);
-  const [wishlistState, setWishlistState] = React.useState(false);
   const history = useHistory();
 
   history.listen((location, action) => {
@@ -34,15 +29,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme[activeTheme]}>
-      <Navbar
-      ></Navbar>
+      <Navbar></Navbar>
       <Router></Router>
-      {/* <Cart setCartState={setCartState} cartState={cartState}></Cart>
-      <WishList
-        setWishlistState={setWishlistState}
-        wishlistState={wishlistState}
-      ></WishList> */}
-      {/* <Footer></Footer> */}
     </ThemeProvider>
   );
 }

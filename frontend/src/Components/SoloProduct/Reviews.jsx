@@ -1,14 +1,16 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import {
-  Paragraph,
-  SubHeadingOne,
-} from "../../Components/Global/Typography";
+import { Paragraph, SubHeadingOne } from "../../Components/Global/Typography";
 import Rating from "@material-ui/lab/Rating";
-
-
-import {ReviewsWrapper,ReviewsHead,ReviewsBody,ReviewForm,EmptyReview,ReviewsCard} from './Styles'
-function Reviews({
+import {
+  ReviewsWrapper,
+  ReviewsHead,
+  ReviewsBody,
+  ReviewForm,
+  EmptyReview,
+  ReviewsCard,
+} from "./Styles";
+export const Reviews = ({
   isAuth,
   postReviews,
   reviews,
@@ -16,7 +18,7 @@ function Reviews({
   productId,
   userReviewData,
   setUserReviewData,
-}) {
+}) => {
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setUserReviewData({ ...userReviewData, [name]: value });
@@ -108,6 +110,4 @@ function Reviews({
       </ReviewsBody>
     </ReviewsWrapper>
   );
-}
-
-export default Reviews;
+};

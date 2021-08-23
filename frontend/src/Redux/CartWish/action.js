@@ -1,8 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionType";
 
-//cart post
-
 const postCartRequest = () => {
   return {
     type: actionTypes.POST_CART_REQUEST,
@@ -25,12 +23,10 @@ const postCartFailure = () => {
 export const postCartHandler = (payload) => (dispatch) => {
   dispatch(postCartRequest());
   return axios
-    .post(`http://localhost:8000/cart`, payload)
+    .post(`https://maskitstore.vercel.app/cart`, payload)
     .then((res) => dispatch(postCartSuccess(res.data)))
     .catch((err) => dispatch(postCartFailure()));
 };
-
-//cart get
 
 const getCartRequest = () => {
   return {
@@ -54,12 +50,10 @@ const getCartFailure = () => {
 export const getCartHandler = (id) => (dispatch) => {
   dispatch(getCartRequest());
   return axios
-    .get(`http://localhost:8000/cart/${id}`)
+    .get(`https://maskitstore.vercel.app/cart/${id}`)
     .then((res) => dispatch(getCartSuccess(res.data)))
     .catch((err) => dispatch(getCartFailure()));
 };
-
-// delete from cart
 
 const deleteCartRequest = () => {
   return {
@@ -83,12 +77,10 @@ const deleteCartFailure = () => {
 export const deleteCartHandler = (id) => (dispatch) => {
   dispatch(deleteCartRequest());
   return axios
-    .delete(`http://localhost:8000/cart/${id}`)
+    .delete(`https://maskitstore.vercel.app/cart/${id}`)
     .then((res) => dispatch(deleteCartSuccess()))
     .catch((err) => dispatch(deleteCartFailure()));
 };
-
-//state for unique cart products to avoid duplication in cart
 
 export const uniqueCartProductsHandler = (data) => {
   return {
@@ -96,8 +88,6 @@ export const uniqueCartProductsHandler = (data) => {
     data,
   };
 };
-
-//wishlist
 
 const postWishlistRequest = () => {
   return {
@@ -121,12 +111,10 @@ const postWishlistFailure = () => {
 export const postWishlistHandler = (payload) => (dispatch) => {
   dispatch(postWishlistRequest());
   return axios
-    .post(`http://localhost:8000/wishlist`, payload)
+    .post(`https://maskitstore.vercel.app/wishlist`, payload)
     .then((res) => dispatch(postWishlistSuccess(res.data)))
     .catch((err) => dispatch(postWishlistFailure()));
 };
-
-//cart get
 
 const getWishlistRequest = () => {
   return {
@@ -150,12 +138,10 @@ const getWishlistFailure = () => {
 export const getWishlistHandler = (id) => (dispatch) => {
   dispatch(getWishlistRequest());
   return axios
-    .get(`http://localhost:8000/wishlist/${id}`)
+    .get(`https://maskitstore.vercel.app/wishlist/${id}`)
     .then((res) => dispatch(getWishlistSuccess(res.data)))
     .catch((err) => dispatch(getWishlistFailure()));
 };
-
-// delete from cart
 
 const deleteWishlistRequest = () => {
   return {
@@ -179,12 +165,10 @@ const deleteWishlistFailure = () => {
 export const deleteWishlistHandler = (id) => (dispatch) => {
   dispatch(deleteWishlistRequest());
   return axios
-    .delete(`http://localhost:8000/wishlist/${id}`)
+    .delete(`https://maskitstore.vercel.app/wishlist/${id}`)
     .then((res) => dispatch(deleteWishlistSuccess()))
     .catch((err) => dispatch(deleteWishlistFailure()));
 };
-
-//state for unique wishlist products to avoid duplication in wishlist
 
 export const uniqueWishlistProductsHandler = (data) => {
   return {
@@ -192,8 +176,6 @@ export const uniqueWishlistProductsHandler = (data) => {
     data,
   };
 };
-
-//empty cart
 
 const emptyCartRequest = () => {
   return {
@@ -217,7 +199,7 @@ const emptyCartFailure = () => {
 export const emptyCartHandler = (id) => (dispatch) => {
   dispatch(emptyCartRequest());
   return axios
-    .delete(`http://localhost:8000/cart/bulk/${id}`)
+    .delete(`https://maskitstore.vercel.app/cart/bulk/${id}`)
     .then((res) => dispatch(emptyCartSuccess()))
     .catch((err) => dispatch(emptyCartFailure()));
 };

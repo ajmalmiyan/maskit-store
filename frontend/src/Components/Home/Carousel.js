@@ -1,6 +1,5 @@
 import React from "react";
 import { Carousel } from "antd";
-//import "antd/dist/antd.css";
 import "antd/lib/carousel/style/index.css";
 import styled from "styled-components";
 
@@ -44,7 +43,7 @@ const data = [
   },
 ];
 
-function Hero() {
+export const Hero=()=> {
   return (
     <div>
       <Carousel effect="scrollx" dotPosition="bottom" autoplay>
@@ -59,5 +58,3 @@ function Hero() {
     </div>
   );
 }
-
-export default Hero;

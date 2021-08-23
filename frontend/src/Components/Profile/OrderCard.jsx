@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import OrderProductCard from "./OrderProductCard";
+import {OrderProductCard} from "./OrderProductCard";
 
 const OrderCardWrapper = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ const ProductPrice = styled.p`
 
 const OrderCardBody = styled.div``;
 
-function OrderCard({
+export const OrderCard=({
   address,
   city,
   createdAt,
@@ -48,7 +48,7 @@ function OrderCard({
   products,
   _id,
   index,
-}) {
+}) =>{
   let orderDate = new Date(createdAt).toLocaleDateString();
 
   let orderTime = new Date(createdAt).toLocaleTimeString();
@@ -124,5 +124,3 @@ function OrderCard({
     </OrderCardWrapper>
   );
 }
-
-export default OrderCard;

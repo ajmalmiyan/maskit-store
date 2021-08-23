@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
-
 import {
   getSoloProductHandler,
   getProductReviewHandler,
@@ -16,13 +15,22 @@ import {
   Paragraph,
   SubHeadingOne,
 } from "../../Components/Global/Typography";
-import Reviews from "./Reviews";
-import Recommendations from "../../Components/Recommendations/Recommendations";
+import { Reviews } from "./Reviews";
+import { Recommendations } from "../../Components/Recommendations/Recommendations";
 import { getCartHandler, postCartHandler } from "../../Redux/CartWish/action";
-import Loader from "../../Components/Loader/Loader";
+import { Loader } from "../../Components/Loader/Loader";
 
-
-import {SoloWrapper,SoloSection,SoloProductImage,Category,SoloProductInfo,ProductPrice,AddToCart,PromotionalSpace,RecommendationWrapper,RecommendationDisplay} from './Styles'
+import {
+  SoloWrapper,
+  SoloSection,
+  SoloProductImage,
+  Category,
+  SoloProductInfo,
+  ProductPrice,
+  AddToCart,
+  RecommendationWrapper,
+  RecommendationDisplay,
+} from "./Styles";
 
 const initState = {
   title: "",
@@ -30,7 +38,7 @@ const initState = {
   rating: 0,
 };
 
-function Solo() {
+export const Solo = () => {
   let { id } = useParams();
   let dispatch = useDispatch();
   let soloProduct = useSelector((state) => state.productReducer.soloProduct);
@@ -64,9 +72,10 @@ function Solo() {
 
   React.useEffect(() => {
     dispatch(getSoloProductHandler(id));
+// eslint-disable-next-line
   }, [id]);
 
-  function addToCartHandler() {
+  const addToCartHandler = () => {
     if (!isAuth) {
       return history.push("/auth/login");
     }
@@ -77,18 +86,19 @@ function Solo() {
     dispatch(postCartHandler(payload)).then((res) =>
       dispatch(getCartHandler(userData._id))
     );
-  }
+  };
 
   React.useEffect(() => {
     getReviews();
     getRecommendations();
+// eslint-disable-next-line
   }, [soloProduct]);
 
-  function getReviews() {
+  const getReviews = () => {
     dispatch(getProductReviewHandler(_id));
-  }
+  };
 
-  function postReviews(reviewData) {
+  const postReviews = (reviewData) => {
     let { title, message, rating } = reviewData;
     let payload = {
       userId: userData?._id,
@@ -101,16 +111,16 @@ function Solo() {
       (res) => getReviews(),
       setUserReviewData(initState)
     );
-  }
+  };
 
-  function getRecommendations() {
+  const getRecommendations = () => {
     dispatch(getRecommendationsHandler(categoryId?._id));
     dispatch(getFromSameBrandHandler(brandId?._id));
-  }
+  };
 
-  function onCheckoutHandler() {
+  const onCheckoutHandler = () => {
     history.push("/checkout");
-  }
+  };
 
   return (
     <>
@@ -124,7 +134,7 @@ function Solo() {
             <SoloProductImage>
               <img src={product_image} alt={product_name}></img>
             </SoloProductImage>
-            
+
             <SoloProductInfo>
               <Breadcrumbs aria-label="breadcrumb">
                 <Link to="/">Home</Link>
@@ -142,7 +152,7 @@ function Solo() {
               </div>
               {isAuth && productsInCart.includes(_id) ? (
                 <div onClick={onCheckoutHandler}>
-                  <AddToCart color="red">Go to Cart</AddToCart>
+                  <AddToCart>Go to Cart</AddToCart>
                 </div>
               ) : (
                 <div onClick={addToCartHandler}>
@@ -151,14 +161,6 @@ function Solo() {
               )}
             </SoloProductInfo>
           </SoloSection>
-          {/* <PromotionalSpace>
-            <div>
-              <SubHeadingOne>
-                Simplicity is about subtracting the obvious and adding the
-                meaningful.
-              </SubHeadingOne>
-            </div>
-          </PromotionalSpace> */}
           <Reviews
             postReviews={postReviews}
             productId={_id}
@@ -189,6 +191,4 @@ function Solo() {
       )}
     </>
   );
-}
-
-export default Solo;
+};

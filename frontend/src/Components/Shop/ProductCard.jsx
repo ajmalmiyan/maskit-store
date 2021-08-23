@@ -16,7 +16,6 @@ const ProductCardWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.backgroundColor};
   transition: all 400ms ease;
   cursor: pointer;
-  /* padding: 5px 10px; */
   padding: 5px 10px;
   box-shadow: 2px 2px 8px #e4e2e2;
   border-radius: 10px;
@@ -85,39 +84,8 @@ const ProductAction = styled.div`
   margin: 20px 0px;
 `;
 
-const CardIcon = styled.div`
-  background-color: #242525;
-  padding: 10px 12px;
-  border-radius: 50%;
-  color: ${(props) => (props.color ? props.color : "#fff")};
-  margin-left: 10px;
-`;
 
-const CartButton = styled.div`
-  background-color: ${(props) =>
-    props.status ? "#a5d61c" : props.theme.btnBackground};
-  padding: 8px 10px;
-  border-radius: 10px;
-  min-width: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: ${(props) => (props.status ? "#000" : "#fff")};
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.2ch;
-  box-shadow: 8px 8px 16px #a7a4a4;
-
-  :hover {
-    i {
-      transition: all 1000ms ease;
-      color: #38343a;
-    }
-  }
-`;
-
-function ProductCard({
+export const ProductCard=({
   _id,
   product_name,
   price,
@@ -133,7 +101,7 @@ function ProductCard({
   productsInWishlist,
   removeFromWishlistHandler,
   onCheckoutHandler,
-}) {
+}) =>{
   let history = useHistory();
   const isAuth = useSelector((state) => state.authReducer.isAuth);
   const onClickHandler = () => {
@@ -150,7 +118,6 @@ function ProductCard({
           <div>
             <div>
               <ProductCategory>Ratings</ProductCategory>
-              {/* <span>Ratings</span> */}
             </div>
             <Rating value={+ratings} readOnly></Rating>
           </div>
@@ -182,5 +149,3 @@ function ProductCard({
     </ProductCardWrapper>
   );
 }
-
-export default ProductCard;

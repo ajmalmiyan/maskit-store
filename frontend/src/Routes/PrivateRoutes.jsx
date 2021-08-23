@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router";
 
-function PrivateRoute({ path, children }) {
+export const PrivateRoute=({ path, children })=> {
   const isAuth = useSelector((state) => state.authReducer.isAuth);
   return isAuth ? (
     <Route exact path={path}>
@@ -13,7 +13,7 @@ function PrivateRoute({ path, children }) {
   );
 }
 
-function AntiPrivateRoute({ path, children }) {
+export const AntiPrivateRoute=({ path, children })=> {
   const isAuth = useSelector((state) => state.authReducer.isAuth);
   return !isAuth ? (
     <Route exact path={path}>
@@ -23,5 +23,3 @@ function AntiPrivateRoute({ path, children }) {
     <Redirect path="/" />
   );
 }
-
-export { PrivateRoute, AntiPrivateRoute };
