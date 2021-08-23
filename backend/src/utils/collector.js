@@ -12,7 +12,6 @@ function categoriesCollector(products) {
         categories[products[i].categoryId._id].items + 1;
     }
   }
-  // console.log(categories)
   return categories;
 }
 

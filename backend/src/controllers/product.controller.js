@@ -22,15 +22,11 @@ router.post("/", async (req, res) => {
     let categories = await Category.find({}).lean().exec();
     categoriesArray = getAll(categories);
   }
-  // console.log(25,categoriesArray,brandsArray)
   let products;
-
-  // console.log(categoriesArray)
-
   products = await Product.find({
     price: { $gte: inComingMin, $lte: inComingMax },
     categoryId: { $in: categoriesArray },
-   brandId: { $in: brandsArray },
+    brandId: { $in: brandsArray },
   })
     .sort(sortSelection !== 0 ? { price: sortSelection } : {})
     .populate("categoryId")
@@ -39,9 +35,6 @@ router.post("/", async (req, res) => {
     .limit(size)
     .lean()
     .exec();
-// console.log(products)
-  //total products
-  
   totalProducts = await Product.find({
     price: { $gte: inComingMin, $lte: inComingMax },
     categoryId: { $in: categoriesArray },
@@ -50,11 +43,8 @@ router.post("/", async (req, res) => {
     .countDocuments()
     .lean()
     .exec();
-
-  //price range
   let min = await Product.findOne({}, { price: 1, _id: 0 }).sort({ price: 1 });
   let max = await Product.findOne({}, { price: 1, _id: 0 }).sort({ price: -1 });
-
   return res.status(200).json({
     totalProducts,
     min: min.price,
@@ -88,7 +78,6 @@ router.get("/home/products", async (req, res) => {
     .populate("brandId")
     .lean()
     .exec();
-
   return res.status(200).json({ featured, popular });
 });
 

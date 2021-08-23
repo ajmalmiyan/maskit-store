@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
     },
     description: { type: String, required: true },
     ratings: { type: Number },
-    description_table: { type: Array},
+    description_table: { type: Array },
   },
   { timestamps: true }
 );
